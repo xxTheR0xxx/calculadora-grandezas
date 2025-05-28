@@ -1,7 +1,7 @@
 export function Card({ children }) {
-  return <div className="border rounded-xl shadow p-4 bg-gray-50">{children}</div>;
+  return <div className="bg-green-800 rounded-lg shadow-md p-4">{children}</div>;
 }
 
-export function CardContent({ children }) {
-  return <div className="text-lg">{children}</div>;
+export function CardContent({ children, className }) {
+  return <div className={className}>{children}</div>;
 }

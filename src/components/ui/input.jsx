@@ -1,8 +1,3 @@
-export function Input({ label, value, onChange }) {
-  return (
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium">{label}</label>
-      <input value={value} onChange={onChange} type="number" className="p-2 border rounded" />
-    </div>
-  );
+export function Input(props) {
+  return <input {...props} className="w-full p-2 rounded bg-green-100 text-green-900" />;
 }

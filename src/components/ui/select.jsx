@@ -1,12 +1,19 @@
-export function Select({ label, value, options, onChange }) {
-  return (
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium">{label}</label>
-      <select value={value} onChange={onChange} className="p-2 border rounded">
-        {options.map(op => (
-          <option key={op} value={op}>{op}</option>
-        ))}
-      </select>
-    </div>
-  );
+export function Select({ value, onValueChange, children }) {
+  return <div className="relative">{children}</div>;
+}
+
+export function SelectTrigger({ children }) {
+  return <button className="w-full bg-green-100 text-green-900 p-2 rounded">{children}</button>;
+}
+
+export function SelectValue({ placeholder }) {
+  return <span>{placeholder}</span>;
+}
+
+export function SelectContent({ children }) {
+  return <div className="absolute z-10 mt-2 w-full bg-white rounded shadow">{children}</div>;
+}
+
+export function SelectItem({ value, children }) {
+  return <div className="px-4 py-2 hover:bg-green-200 cursor-pointer">{children}</div>;
 }
