@@ -131,12 +131,15 @@ export default function CalculadoraGrandezas() {
     : unidades[categoria] || [];
 
   return (
-    <div className="flex h-screen bg-green-950 text-green-100" style={{ backgroundImage: 'url(\"https://www.transparenttextures.com/patterns/cubes.png\")' }}>
-      <aside className="w-72 bg-green-900 p-4 overflow-auto">
+    <div className="flex flex-col md:flex-row h-screen bg-green-950 text-green-100" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }}>
+      <aside className="w-full md:w-72 bg-green-900 p-4 overflow-auto">
         <h2 className="text-xl font-bold mb-4 text-yellow-200">Calculadora de Grandezas</h2>
         {grupos.map(({ nome, categorias }) => (
-          <div key={nome} className="mb-4 group" onMouseEnter={() => setAberto(prev => ({ ...prev, [nome]: true }))} onMouseLeave={() => setAberto(prev => ({ ...prev, [nome]: false }))}>
-            <button className="flex items-center justify-between w-full text-left text-yellow-300 font-semibold text-sm mb-2">
+          <div key={nome} className="mb-4 group">
+            <button
+              className="flex items-center justify-between w-full text-left text-yellow-300 font-semibold text-sm mb-2"
+              onClick={() => setAberto(prev => ({ ...prev, [nome]: !prev[nome] }))}
+            >
               {nome} <ChevronDown className={`transition-transform ${aberto[nome] ? 'rotate-180' : ''}`} size={16} />
             </button>
             {aberto[nome] && (
@@ -165,24 +168,18 @@ export default function CalculadoraGrandezas() {
 
       <main className="flex-1 p-6 overflow-auto">
         {!categoria ? (
-          <div className="text-center max-w-2xl mx-auto mt-24">
-            <h1 className="text-4xl font-bold mb-4 text-yellow-200">Bem-vindo à Calculadora de Grandezas</h1>
-            <p className="text-lg text-green-100">
-              Esta é uma iniciativa do <strong>Prof. Helder Carozzi</strong>, docente do curso de Engenharia Elétrica do Centro Universitário FAG e coordenador dos projetos de pesquisa e extensão das Engenharias. Engenheiro de Telecomunicações, Helder atua há 16 anos como professor da instituição.
+          <div className="text-center max-w-2xl mx-auto mt-12">
+            <h1 className="text-3xl font-bold mb-4 text-yellow-200">Bem-vindo à Calculadora de Grandezas</h1>
+            <p className="text-base text-green-100">
+              Esta é uma iniciativa do <strong>Prof. Helder Carozzi</strong>, docente do curso de Engenharia Elétrica do Centro Universitário FAG e coordenador dos projetos de pesquisa e extensão das Engenharias.
             </p>
-	    <img
-	      src={helderImage}
- 	      alt="Professor Helder Carozzi"
- 	      className="mx-auto mt-12 rounded-2xl shadow-xl w-48"
-	    />
-
+            <img src={helderImage} alt="Professor Helder Carozzi" className="mx-auto mt-8 rounded-2xl shadow-xl w-48" />
           </div>
         ) : (
           <div className="max-w-xl mx-auto space-y-4">
             <h2 className="text-2xl font-bold text-yellow-200">{categoria}</h2>
             <Input type="number" placeholder="Valor" value={valor} onChange={e => setValor(e.target.value)} />
-
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Select onValueChange={setOrigem} value={origem}>
                 <SelectTrigger><SelectValue placeholder="Origem" /></SelectTrigger>
                 <SelectContent>
@@ -201,9 +198,7 @@ export default function CalculadoraGrandezas() {
                 </SelectContent>
               </Select>
             </div>
-
-            <button onClick={converter} className="bg-yellow-400 text-green-900 px-4 py-2 rounded hover:bg-yellow-300">Converter</button>
-
+            <button onClick={converter} className="bg-yellow-400 text-green-900 px-4 py-2 rounded hover:bg-yellow-300 w-full">Converter</button>
             {resultado !== '' && (
               <Card><CardContent className="text-center text-xl font-semibold text-yellow-200">Resultado: {resultado}</CardContent></Card>
             )}
